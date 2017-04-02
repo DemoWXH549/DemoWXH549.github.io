@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            perspective: 1000px;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 3s;
+        }
+        .box ul {
+            width: 100%;
+            height: 100%;
+            /*border-radius: 20px;*/
+            background-color: darkgrey;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            /*opacity: .5;*/
+        }
+        .box ul div {
+            height: 50px;
+            width: 50px;
+            background-color: greenyellow;
+            border-radius: 50%;
+        }
+        .box li {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            /*transition: all 3s;*/
+        }
+        /* one */
+        .one li {
+            justify-content: center;
+            align-items: center;
+        }
+        /* two */
+        .two li {
+            justify-content: space-around;
+            align-items: center;
+        }
+        /* three*/
+        .three li {
+            justify-content: space-around;
+            align-items: center;
+        }
+        .three li div:first-child {
+            align-self: flex-start;
+            margin: 10px;
+        }
+        .three li div:last-child {
+            align-self: flex-end;
+            margin: 10px;
+        }
+        /* four */
+        .four {
+            display: flex;
+        }
+        .four li {
+            flex: 1;
+            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* five */
+        .five {
+            display: flex;
+        }
+        .five li {
+            flex: 4;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .five li:nth-child(2){
+            flex:1;
+        }
+        /* six */
+        .six {
+            display: flex;
+            flex-direction: column;
+        }
+        .six li {
+            flex: 1;
+            justify-content: space-around;
+            align-items: center;
+        }
+        /* 立体 */
+        .box .one {
+            background-color: lightskyblue;
+            transform: rotatez(0deg) translatez(100px);
+        }
+        .box .two {
+            transform: rotatez(0deg) translatez(-100px);
+            background-color: darkseagreen;
+        }
+        .box .three {
+            transform: rotatex(90deg) translatez(100px);
+            background-color: darkkhaki;
+        }
+        .box .four {
+            transform: rotatex(-90deg) translatez(100px);
+            background-color: burlywood;
+        }
+        .box .five {
+            transform: rotatey(90deg) translatez(100px);
+            background-color: hotpink;
+        }
+        .box .six {
+            transform: rotatey(-90deg) translatez(100px);
+            background-color: firebrick;
+        }
+        h2 {
+            text-align: center;
+        }
+        input {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+        }
+    </style>
+    <script src="../js/jquery-1.12.2.js"></script>
+    <script>
+        $(function () {
+            var rtx, rty, rtz;
+            var flag = true;
+            $('input').click(function () {
+                if(flag){
+                    flag= false;
+                    rtx = Math.floor(Math.random()*6)*450;
+                    rty = Math.floor(Math.random()*6)*450;
+                    rtz = Math.floor(Math.random()*6)*450;
+                    $('.box').css({'transform':'rotatex('+rtx+'deg)'+'rotatey('+rty+'deg)'+'rotatez('+rtz+'deg)'});
+                }
+            })
+            document.querySelector('.box').addEventListener('transitionend',function(){
+                //  过渡完毕之后 就能够 修改 标示变量 让其 再次 开始旋转
+                flag =true;
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="box">
+     <!-- 一点 -->
+     <ul class="one">
+         <li>
+             <div></div>
+         </li>
+     </ul>
+     <!-- 二点 -->
+     <ul class="two">
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+     </ul>
+     <!-- 三点 -->
+     <ul class="three">
+         <li>
+             <div></div>
+             <div></div>
+             <div></div>
+         </li>
+     </ul>
+     <!-- 四点 -->
+     <ul class="four">
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+     </ul>
+     <!-- 五点 -->
+     <ul class="five">
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+         <li>
+             <div></div>
+        </li>
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+     </ul>
+     <!-- 六点 -->
+     <ul class="six">
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+         <li>
+             <div></div>
+             <div></div>
+         </li>
+     </ul>
+ </div>
+    <input type="button" value="随机点数"/>
+</body>
+</html>
